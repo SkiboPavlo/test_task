@@ -1,0 +1,45 @@
+<head>
+  <title>Tasks</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<h1>Tasks</h1>
+
+<div class="container">
+  <table class="table">
+  <h2>Tasks</h2>
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Description</th>
+        <th>user_id</th>
+        <th>assignee_id</th>
+        <th>task_list_id</th>
+        <th>tag_id</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @tasks.each do |task| %>
+        <tr>
+          <td><%= link_to task.title, task_path(task) %></td>
+          <td><%= link_to task.description, task_path(task) %></td>
+          <td><%= link_to task.user_id, task_path(task) %></td>
+          <td><%= link_to task.assignee_id, task_path(task) %></td>
+          <td><%= link_to task.task_list_id, task_path(task) %></td>
+          <td><%= link_to task.tag_id, task_path(task) %></td>
+          <td><%= link_to 'Edit', edit_task_path(task), class: 'btn btn-primary' %></td>
+          <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' },
+          class: 'btn btn-danger' %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<br>
+
+<%= link_to 'New Task', new_task_path, class: 'btn btn-default' %>

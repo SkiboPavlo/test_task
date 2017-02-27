@@ -1,0 +1,38 @@
+<h1>Editing Task</h1>
+
+<%= form_for(@task) do |f| %>
+
+<div class="field">
+  <%= f.label :title %>
+  <%= f.text_field :title %>
+</div>
+
+<div class="field">
+  <%= f.label :description %>
+  <%= f.text_field :description %>
+</div>
+
+<div class="field">
+  <%= f.label :user_id %>
+  <%= f.select :user_id, User.all.collect {|p| [ p.email, p.id ] } %>
+</div>
+
+<div class="field">
+  <%= f.label :assigne_id %>
+  <%= f.number_field :assignee_id %>
+</div>
+
+<div class="field">
+  <%= f.label :task_list_id %>
+  <%= f.select :task_list_id, TaskList.all.collect {|p| [ p.title, p.id ] } %>
+</div>
+
+<div class="field">
+  <%= f.label :tag_id %>
+  <%= f.select :tag_id, Tag.all.collect {|p| [ p.title, p.description, p.id ] } %>
+</div>
+
+<%= f.submit "Update", class: 'btn btn-default' %>
+<%= link_to 'Show', @task, class: 'btn btn-default' %>
+<%= link_to 'Back', tasks_path, class: 'btn btn-default' %>
+<% end %>

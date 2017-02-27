@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170223164922) do
+ActiveRecord::Schema.define(version: 20170227153722) do
 
   create_table "projects", force: :cascade do |t|
     t.string  "title"
@@ -18,12 +18,29 @@ ActiveRecord::Schema.define(version: 20170223164922) do
     t.index ["user_id"], name: "index_projects_on_user_id"
   end
 
-  create_table "tasks", force: :cascade do |t|
+  create_table "tags", force: :cascade do |t|
     t.string  "title"
     t.text    "description"
     t.integer "project_id"
+    t.integer "task_id"
+    t.index ["project_id"], name: "index_tags_on_project_id"
+    t.index ["task_id"], name: "index_tags_on_task_id"
+  end
+
+  create_table "task_lists", force: :cascade do |t|
+    t.string  "title"
+    t.integer "project_id"
+    t.index ["project_id"], name: "index_task_lists_on_project_id"
+  end
+
+  create_table "tasks", force: :cascade do |t|
+    t.string  "title"
+    t.text    "description"
     t.integer "user_id"
-    t.index ["project_id"], name: "index_tasks_on_project_id"
+    t.integer "assignee_id"
+    t.integer "task_list_id"
+    t.index ["assignee_id"], name: "index_tasks_on_assignee_id"
+    t.index ["task_list_id"], name: "index_tasks_on_task_list_id"
     t.index ["user_id"], name: "index_tasks_on_user_id"
   end
 

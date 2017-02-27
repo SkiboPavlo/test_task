@@ -1,0 +1,28 @@
+<h1>Editing Tag</h1>
+
+<%= form_for @tag, url: {action: "update"}, html: {class: "nifty_form"} do |f| %>
+
+<div class="field">
+  <%= f.label :title %>
+  <%= f.text_field :title %>
+</div>
+
+<div class="field">
+  <%= f.label :description %>
+  <%= f.text_field :description %>
+</div>
+
+<div class="field">
+  <%= f.label :project_id %>
+  <%= f.select :project_id, Project.all.collect {|p| [ p.title, p.id ] } %>
+</div>
+
+<div class="field">
+  <%= f.label :task_id %>
+  <%= f.select :task_id, Task.all.collect {|t| [ t.title, t.id ] } %>
+</div>
+
+<%= f.submit 'Update', class: 'btn btn-default' %>
+<%= link_to 'Show', project_tag_path, class: 'btn btn-default' %>
+<%= link_to 'Back', project_tags_path, class: 'btn btn-default' %>
+<% end %>

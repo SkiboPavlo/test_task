@@ -1,0 +1,17 @@
+<h1>New Task_list</h1>
+<%= form_for @task_list, url: {action: "create"}, html: {class: "nifty_form"} do |f| %>
+
+ <div class="field">
+  <%= f.label :title %>
+  <%= f.text_field :title %>
+ </div>
+
+ <div class="field">
+  <%= f.label :project_id %>
+  <%= f.select :project_id, Project.all.collect {|p| [ p.title, p.id ] } %>
+ </div>
+
+  <%= f.submit "Create", class: 'btn btn-default' %>
+  <%= link_to 'Back', project_task_lists_path, class: 'btn btn-default' %>
+  <%= link_to 'All Task_lists', project_task_lists_path, class: 'btn btn-default' %>
+<% end %>
