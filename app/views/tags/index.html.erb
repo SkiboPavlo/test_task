@@ -1,21 +1,13 @@
-<head>
-  <title>Tags</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-</head>
-<body>
-<div class="container">
-  <table class="table">
-  <h2>Tags</h2>
+<div class="col-md-3">
+<h2>Tags</h2>
+  <%= link_to 'New Tag', new_project_tag_path, class: 'btn btn-primary' %>
+
+  <table class="table table-striped">
     <thead>
       <tr>
         <th>Title</th>
         <th>Description</th>
         <th>Project_id</th>
-        <th>Task_id</th>
       </tr>
     </thead>
 
@@ -25,12 +17,12 @@
           <td><%= link_to tag.title, project_tags_path(@project, tag) %></td>
           <td><%= link_to tag.description, project_tags_path(@project) %></td>
           <td><%= link_to tag.project_id, project_tags_path(@project) %></td>
-          <td><%= link_to 'Edit', edit_project_tag_path(@project, tag), class: 'btn btn-primary' %></td>
+          <td><%= link_to 'Edit', edit_project_tag_path(@project, tag),
+            class: 'btn btn-warning' %></td>
           <td><%= link_to 'Destroy', project_tag_path(@project, tag), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %></td>
         </tr>
       <% end %>
     </tbody>
   </table>
 </div>
-<br>
-<%= link_to 'New Tag', new_project_tag_path, class: 'btn btn-default' %>
+

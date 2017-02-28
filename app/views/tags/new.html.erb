@@ -1,20 +1,25 @@
-<h1>New Tag</h1>
+<div class="col-md-4">
+  <div class="form-horizontal">
+    <h1>New Tag</h1>
 
-<%= form_for @tag, url: {action: "create"}, html: {class: "nifty_form"} do |f| %>
+    <%= form_for @tag, url: {action: "create"}, html: {class: "nifty_form"} do |f| %>
+      <div class="form-group">
+        <div class="col-xs-2">
+          <%= f.label :title %>
+          <%= f.text_field :title %>
 
-  <%= f.label :title %>
-  <%= f.text_field :title %>
+          <%= f.label :description %>
+          <%= f.text_field :description %>
 
-  <%= f.label :description %>
-  <%= f.text_field :description %>
+          <%= f.label :project_id %>
+          <%= f.select :project_id, Project.all.collect {|p| [ p.title, p.id ] } %>
+        </div>
+      </div>
 
-  <%= f.label :project_id %>
-  <%= f.select :project_id, Project.all.collect {|p| [ p.title, p.id ] } %>
+      <%= f.submit "Create", class: 'btn btn-primary' %>
+      <%= link_to 'All Tags', project_tags_path, class: 'btn btn-warning' %>
+      <%= link_to 'Back', project_tags_path, class: 'btn btn-default' %><br>
+    <% end %>
+  </div>
+</div>
 
-  <%= f.label :task_id %>
-  <%= f.select :task_id, Task.all.collect {|t| [ t.title, t.id ] } %>
-
-  <%= f.submit "Create", class: 'btn btn-default' %>
-  <%= link_to 'Back', project_tags_path, class: 'btn btn-default' %><br>
-  <%= link_to 'All Tags', project_tags_path, class: 'btn btn-default' %>
-<% end %>

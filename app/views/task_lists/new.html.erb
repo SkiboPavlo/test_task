@@ -1,17 +1,22 @@
-<h1>New Task_list</h1>
-<%= form_for @task_list, url: {action: "create"}, html: {class: "nifty_form"} do |f| %>
+<div class="col-md-4">
+  <div class="form-horizontal">
+    <h1>New Task_list</h1>
 
- <div class="field">
-  <%= f.label :title %>
-  <%= f.text_field :title %>
- </div>
+    <%= form_for @task_list, url: {action: "create"}, html: {class: "nifty_form"} do |f| %>
+      <div class="form-group">
+        <div class="col-xs-2">
+          <%= f.label :title %>
+          <%= f.text_field :title %>
 
- <div class="field">
-  <%= f.label :project_id %>
-  <%= f.select :project_id, Project.all.collect {|p| [ p.title, p.id ] } %>
- </div>
+          <%= f.label :project_id %>
+          <%= f.select :project_id, Project.all.collect {|p| [ p.title, p.id ] } %>
+        </div>
+      </div>
 
-  <%= f.submit "Create", class: 'btn btn-default' %>
-  <%= link_to 'Back', project_task_lists_path, class: 'btn btn-default' %>
-  <%= link_to 'All Task_lists', project_task_lists_path, class: 'btn btn-default' %>
-<% end %>
+      <%= f.submit "Create", class: 'btn btn-primary' %>
+      <%= link_to 'All Task_lists', project_task_lists_path, class: 'btn btn-warning' %>
+      <%= link_to 'Back', project_task_lists_path, class: 'btn btn-default' %>
+    <% end %>
+  </div>
+</div>
+

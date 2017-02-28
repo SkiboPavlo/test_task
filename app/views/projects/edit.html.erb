@@ -1,18 +1,21 @@
-<h3>Editing Project</h3>
+<div class="col-md-4">
+  <div class="form-horizontal">
+    <h3>Editing Project</h3>
 
-<%= form_for(@project) do |f| %>
+    <%= form_for(@project) do |f| %>
+      <div class="form-group">
+        <div class="col-xs-2">
+          <%= f.label :title %>
+          <%= f.text_field :title %>
 
-<div class="field">
-  <%= f.label :title %>
-  <%= f.text_field :title %>
+          <%= f.label :user_id %>
+          <%= f.select :user_id, User.all.collect {|p| [ p.email, p.id ] } %>
+        </div>
+      </div>
+
+      <%= f.submit "Update", class: 'btn btn-primary' %>
+      <%= link_to 'Show', @project, class: 'btn btn-primary' %>
+      <%= link_to 'Back', projects_path, class: 'btn btn-default' %>
+    <% end %>
+  </div>
 </div>
-
-<div class="field">
-  <%= f.label :user_id %>
-  <%= f.select :user_id, User.all.collect {|p| [ p.email, p.id ] } %>
-</div>
-
-<%= f.submit "Update", class: 'btn btn-default' %>
-<%= link_to 'Show', @project, class: 'btn btn-default' %>
-<%= link_to 'Back', projects_path, class: 'btn btn-default' %>
-<% end %>

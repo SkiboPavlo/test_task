@@ -1,12 +1,11 @@
-<p>
-  <strong>Title:</strong>
-  <%= @task_list.title %>
-</p>
+<div class="form-group">
+  <div class="col-md-4">
+    <p><strong>Title:</strong>
+      <%= @task_list.title %></p>
+    <p><strong>Project_id:</strong>
+      <%= @task_list.project_id %></p>
 
-<p>
-  <strong>Project_id:</strong>
-  <%= @task_list.project_id %>
-</p>
-
-<%= link_to "new task", new_task_path(@task), class: 'btn btn-default' %>
-<%= link_to 'Back', project_task_lists_path, class: 'btn btn-default' %>
+    <%= link_to "New task", new_task_path(@task), class: 'btn btn-primary' %>
+    <%= link_to 'Back', project_task_lists_path, class: 'btn btn-default' %>
+  </div>
+</div>
