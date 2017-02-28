@@ -1,6 +1,10 @@
-<div class="col-md-3">
+<div class="col-md-4">
 <h2>Tags</h2>
-  <%= link_to 'New Tag', new_project_tag_path, class: 'btn btn-primary' %>
+
+  <%= link_to 'New Tag', new_project_task_list_task_tag_path, class: 'btn btn-primary' %>
+  <%= link_to 'All Projects', projects_path, class: 'btn btn-primary' %>
+  <%= link_to 'All Task_lists', project_task_lists_path, class: 'btn btn-primary' %>
+  <%= link_to 'All Tasks', project_task_list_tasks_path, class: 'btn btn-primary' %>
 
   <table class="table table-striped">
     <thead>
@@ -8,18 +12,22 @@
         <th>Title</th>
         <th>Description</th>
         <th>Project_id</th>
+        <th>Task_id</th>
       </tr>
     </thead>
 
     <tbody>
       <% @tags.each do |tag| %>
         <tr>
-          <td><%= link_to tag.title, project_tags_path(@project, tag) %></td>
-          <td><%= link_to tag.description, project_tags_path(@project) %></td>
-          <td><%= link_to tag.project_id, project_tags_path(@project) %></td>
-          <td><%= link_to 'Edit', edit_project_tag_path(@project, tag),
+          <td><%= link_to tag.title, project_task_list_task_tag_path(@project, @task_list, @task, tag) %></td>
+          <td><%= link_to tag.description, project_task_list_task_tags_path(@project, @task_list, @task) %>
+          </td>
+          <td><%= link_to tag.project_id, project_task_list_task_tags_path(@project, @task_list, @task) %></td>
+          <td><%= link_to tag.task_id, project_task_list_task_tags_path(@project, @task_list, @task) %></td>
+          <td><%= link_to 'Edit', edit_project_task_list_task_tag_path(@project, @task_list, @task, tag),
             class: 'btn btn-warning' %></td>
-          <td><%= link_to 'Destroy', project_tag_path(@project, tag), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %></td>
+          <td><%= link_to 'Destroy', project_task_list_task_tag_path(@project, @task_list, @task, tag),
+            method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %></td>
         </tr>
       <% end %>
     </tbody>

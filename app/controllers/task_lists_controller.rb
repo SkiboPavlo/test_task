@@ -45,6 +45,7 @@ class TaskListsController < ApplicationController
 
   def load_task_list
     @task_list = TaskList.find params[:id]
+    @project = Project.find params[:project_id]
     render :file => "#{Rails.root}/public/404.html",  :status => 404 unless @task_list
   end
 

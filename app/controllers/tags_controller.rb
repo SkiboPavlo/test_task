@@ -4,10 +4,15 @@
   def index
     @tags = Tag.all
     @project = Project.find params[:project_id]
+    @task_list = TaskList.find params[:task_list_id]
+    @task = Task.find params[:task_id]
   end
 
   def new
     @tag = Tag.new
+    @project = Project.find params[:project_id]
+    @task_list = TaskList.find params[:task_list_id]
+    @task = Task.find params[:task_id]
   end
 
   def edit
@@ -19,7 +24,7 @@
   def create
     @tag = Tag.new(tag_params)
     if @tag.save
-      redirect_to project_tags_path
+      redirect_to project_task_list_task_tags_path
     else
       flash[:errors] = @tag.errors.messages
       render :new
@@ -28,7 +33,7 @@
 
   def update
     if @tag.update_attributes(tag_params)
-      redirect_to project_tags_path
+      redirect_to project_task_list_task_tags_path
     else
       flash[:errors] = @tag.errors.messages
       render :edit
@@ -37,7 +42,7 @@
 
   def destroy
     @tag.destroy
-    redirect_to project_tags_path
+    redirect_to project_task_list_task_tags_path
   end
 
   private
@@ -45,10 +50,12 @@
   def load_tag
     @tag = Tag.find params[:id]
     @project = Project.find params[:project_id]
+    @task_list = TaskList.find params[:task_list_id]
+    @task = Task.find params[:task_id]
     render :file => "#{Rails.root}/public/404.html",  :status => 404 unless @tag
   end
 
   def tag_params
-    params.require(:tag).permit(:title, :description, :project_id)
+    params.require(:tag).permit(:title, :description, :project_id, :task_id)
   end
 end

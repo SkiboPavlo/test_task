@@ -11,6 +11,10 @@
     <p><strong>Task_list_id:</strong>
       <%= @task.task_list_id %></p>
 
-    <%= link_to 'Back', tasks_path, class: 'btn btn-default' %>
+    <%= link_to 'New Tag', new_project_task_list_task_tag_path(@project, @task_list, @task),
+     class: 'btn btn-primary' %>
+    <%= link_to 'All Tag', project_task_list_task_tags_path(@project, @task_list, @task),
+     class: 'btn btn-primary' %>
+    <%= link_to 'Back', project_task_list_tasks_path, class: 'btn btn-default' %>
   </div>
 </div>

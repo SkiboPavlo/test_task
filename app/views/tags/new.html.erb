@@ -13,12 +13,15 @@
 
           <%= f.label :project_id %>
           <%= f.select :project_id, Project.all.collect {|p| [ p.title, p.id ] } %>
+
+          <%= f.label :task_id %>
+          <%= f.select :task_id, Task.all.collect {|t| [ t.title, t.id ] } %>
         </div>
       </div>
 
       <%= f.submit "Create", class: 'btn btn-primary' %>
-      <%= link_to 'All Tags', project_tags_path, class: 'btn btn-warning' %>
-      <%= link_to 'Back', project_tags_path, class: 'btn btn-default' %><br>
+      <%= link_to 'All Tags', project_task_list_task_tags_path, class: 'btn btn-warning' %>
+      <%= link_to 'Back', project_task_list_tasks_path, class: 'btn btn-default' %><br>
     <% end %>
   </div>
 </div>
