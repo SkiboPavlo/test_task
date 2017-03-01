@@ -9,7 +9,7 @@
           <%= f.text_field :title %>
 
           <%= f.label :project_id %>
-          <h4><%= @task_list.project.title %></h4>
+          <%= f.select :title, Project.all.collect {|p| [ p.title, p.id ] } %>
         </div>
       </div>
 

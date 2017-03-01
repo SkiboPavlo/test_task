@@ -9,7 +9,7 @@
           <%= f.text_field :title %>
 
           <%= f.label :user_id %>
-          <h4><%= @project.user.email %></h4>
+          <%= f.select :user_id, User.all.collect {|p| [ p.email, p.id ] } %>
         </div>
       </div>
 

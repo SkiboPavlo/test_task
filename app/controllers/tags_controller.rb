@@ -2,17 +2,17 @@
   before_action :load_tag, only: [:edit, :update, :destroy, :show]
 
   def index
-    @tags = Tag.all
     @project = Project.find params[:project_id]
     @task_list = TaskList.find params[:task_list_id]
     @task = Task.find params[:task_id]
+    @tags = @task.tags.all
   end
 
   def new
-    @tag = Tag.new
+    task = Task.find params[:task_id]
+    @tag = task.tags.new{:task_id}
     @project = Project.find params[:project_id]
     @task_list = TaskList.find params[:task_list_id]
-    @task = Task.find params[:task_id]
   end
 
   def edit
@@ -22,7 +22,10 @@
   end
 
   def create
-    @tag = Tag.new(tag_params)
+    @project = Project.find params[:project_id]
+    @task_list = TaskList.find params[:task_list_id]
+    task = Task.find params[:task_id]
+    @tag = task.tags.new{:task_id}
     if @tag.save
       redirect_to project_task_list_task_tags_path
     else

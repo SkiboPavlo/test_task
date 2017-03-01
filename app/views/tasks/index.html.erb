@@ -1,8 +1,8 @@
-<div class="col-md-3">
+<div class="col-md-8">
 <h2>Tasks</h2>
-  <%= link_to 'New Task', new_project_task_list_task_path, class: 'btn btn-primary' %>
+  <%= link_to 'New Task', new_task_list_task_path, class: 'btn btn-primary' %>
   <%= link_to 'All Projects', projects_path, class: 'btn btn-primary' %>
-  <%= link_to 'All Task_lists', project_task_lists_path, class: 'btn btn-primary' %>
+  <%= link_to 'All Task_lists', project_task_lists_path(@task_list.project.id), class: 'btn btn-primary' %>
 
   <table class="table table-striped">
     <thead>
@@ -18,15 +18,14 @@
     <tbody>
       <% @tasks.each do |task| %>
         <tr>
-          <td><%= link_to task.title, project_task_list_task_path(@project, @task_list, task) %></td>
-          <td><%= link_to task.description, project_task_list_task_path(@project, @task_list, task) %></td>
-          <td><%= link_to task.user.email, project_task_list_task_path(@project, @task_list, task) %></td>
-          <td><%= link_to task.assignee.email, project_task_list_task_path(@project, @task_list, task) %></td>
-          <td><%= link_to task.task_list_id, project_task_list_task_path(@project, @task_list, task) %></td>
-          <td><%= link_to 'Edit', edit_project_task_list_task_path(@project, @task_list, task),
-            class: 'btn btn-warning' %></td>
-          <td><%= link_to 'Destroy', project_task_list_tasks_path, method: :delete,
-            data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %></td>
+          <td><%= link_to task.title, task_list_tasks_path  %></td>
+          <td><%= link_to task.description, task_list_tasks_path %></td>
+          <td><%= link_to task.user.email, task_list_tasks_path %></td>
+          <td><%= link_to task.assignee.email, task_list_tasks_path %></td>
+          <td><%= link_to task.task_list_id, task_list_tasks_path %></td>
+          <td><%= link_to 'Edit', edit_task_path(task), class: 'btn btn-warning' %></td>
+          <td><%= link_to 'Destroy', task_path(task), method: :delete, data: { confirm: 'Are you sure?' },
+            class: 'btn btn-danger' %></td>
         </tr>
       <% end %>
     </tbody>

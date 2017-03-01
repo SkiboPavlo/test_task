@@ -2,9 +2,12 @@
   <div class="form-horizontal">
     <h1>Editing Task</h1>
 
-    <%= form_for :task do |f| %>
+    <%= form_for(@task) do |f| %>
       <div class="form-group">
         <div class="col-xs-2">
+          <%= f.label :task_list_id %>
+          <%= f.select :title, TaskList.all.collect {|p| [ p.title, p.id ]} %>
+
           <%= f.label :title %>
           <%= f.text_field :title %>
 
@@ -14,17 +17,14 @@
           <%= f.label :user_id %>
           <%= f.select :user_id, User.all.collect {|p| [ p.email, p.id ] } %>
 
-          <%= f.label :assigne_id %>
-          <%= f.number_field :assignee_id %>
-
-          <%= f.label :task_list_id %>
-          <%= f.select :task_list_id, TaskList.all.collect {|p| [ p.title, p.id ] } %>
+          <%= f.label :assignee_id %>
+          <%= f.select :assignee_id, User.all.collect {|p| [ p.email, p.id ] } %>
         </div>
       </div>
 
       <%= f.submit "Update", class: 'btn btn-primary' %>
-      <%= link_to 'Show', project_task_list_task_path, class: 'btn btn-primary' %>
-      <%= link_to 'Back', project_task_list_tasks_path, class: 'btn btn-default' %>
+      <%= link_to 'Show', task_path, class: 'btn btn-primary' %>
+      <%= link_to 'Back', task_list_tasks_path(@task.task_list.id), class: 'btn btn-default' %>
     <% end %>
   </div>
 </div>

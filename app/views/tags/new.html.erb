@@ -2,7 +2,16 @@
   <div class="form-horizontal">
     <h1>New Tag</h1>
 
+      <div class="form-inline">
+        <p><%= "Project:" %></p>
+        <p><%= @task_list.project.title %></p>
+        <p><%= @task_list.project.id %></p>
+        <p><%= "Task_list:" %></p>
+        <p><%= @tag.task.title %></>
+        <p><%= @tag.task.id %></p>
+      </div>
     <%= form_for @tag, url: {action: "create"}, html: {class: "nifty_form"} do |f| %>
+
       <div class="form-group">
         <div class="col-xs-2">
           <%= f.label :title %>
@@ -10,12 +19,6 @@
 
           <%= f.label :description %>
           <%= f.text_field :description %>
-
-          <%= f.label :project_id %>
-          <%= f.select :project_id, Project.all.collect {|p| [ p.title, p.id ] } %>
-
-          <%= f.label :task_id %>
-          <%= f.select :task_id, Task.all.collect {|t| [ t.title, t.id ] } %>
         </div>
       </div>
 
@@ -25,4 +28,3 @@
     <% end %>
   </div>
 </div>
-

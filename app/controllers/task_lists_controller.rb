@@ -8,7 +8,7 @@ class TaskListsController < ApplicationController
 
   def new
     project = Project.find(params[:project_id])
-    @task_list = project.task_lists.new{:project_id}
+    @task_list = project.task_lists.build
   end
 
   def edit
@@ -19,7 +19,7 @@ class TaskListsController < ApplicationController
 
   def create
     project = Project.find(params[:project_id])
-    @task_list = project.task_lists.new(task_list_params)
+    @task_list = project.task_lists.build(task_list_params)
     if @task_list.save
       redirect_to project_task_lists_path
     else
@@ -30,7 +30,7 @@ class TaskListsController < ApplicationController
 
   def update
     if @task_list.update_attributes(task_list_params)
-      redirect_to project_task_lists_path
+      redirect_to project_task_lists_path(@task_list.project.id)
     else
       flash[:errors] = @task_list.errors.messages
       render :edit
@@ -39,14 +39,13 @@ class TaskListsController < ApplicationController
 
   def destroy
     @task_list.destroy
-    redirect_to project_task_lists_path
+    redirect_to project_task_lists_path(@task_list.project.id)
   end
 
   private
 
   def load_task_list
     @task_list = TaskList.find params[:id]
-    @project = Project.find params[:project_id]
     render :file => "#{Rails.root}/public/404.html",  :status => 404 unless @task_list
   end
 
