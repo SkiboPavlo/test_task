@@ -2,13 +2,13 @@ class TaskListsController < ApplicationController
   before_action :load_task_list, only: [:edit, :update, :destroy, :show]
 
   def index
-    @task_lists = TaskList.all
     @project = Project.find params[:project_id]
+    @task_lists = @project.task_lists.all
   end
 
   def new
-    @task_list = TaskList.new
-    @project = Project.find params[:project_id]
+    project = Project.find(params[:project_id])
+    @task_list = project.task_lists.new{:project_id}
   end
 
   def edit
@@ -18,7 +18,8 @@ class TaskListsController < ApplicationController
   end
 
   def create
-    @task_list = TaskList.new(task_list_params)
+    project = Project.find(params[:project_id])
+    @task_list = project.task_lists.new(task_list_params)
     if @task_list.save
       redirect_to project_task_lists_path
     else

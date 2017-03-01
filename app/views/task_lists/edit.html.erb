@@ -1,15 +1,15 @@
 <div class="col-md-4">
   <div class="form-horizontal">
     <h1>Editing Task_list</h1>
-
-    <%= form_for :task_list do |f| %>
+    <%= form_for @task_list, url: project_task_lists_path do |f| %>
       <div class="form-group">
         <div class="col-xs-2">
           <%= f.label :title %>
           <%= f.text_field :title %>
 
           <%= f.label :project_id %>
-          <%= f.number_field :project_id %>
+          <h4><%= @task_list.project.title %></h4>
+          <h4><%= @task_list.project.id %></h4>
         </div>
       </div>
 

@@ -4,6 +4,8 @@
       <%= @task_list.title %></p>
     <p><strong>Project_id:</strong>
       <%= @task_list.project_id %></p>
+      <p><strong>Project_title:</strong>
+      <%= @project.title %></p>
 
     <%= link_to "New task", new_project_task_list_task_path(@project, @task_list),
       class: 'btn btn-primary' %>

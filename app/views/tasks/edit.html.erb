@@ -2,7 +2,7 @@
   <div class="form-horizontal">
     <h1>Editing Task</h1>
 
-    <%= form_for @task, url: {action: "update"}, html: {class: "nifty_form"} do |f| %>
+    <%= form_for :task do |f| %>
       <div class="form-group">
         <div class="col-xs-2">
           <%= f.label :title %>

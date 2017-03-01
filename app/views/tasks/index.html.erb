@@ -10,7 +10,7 @@
         <th>Title</th>
         <th>Description</th>
         <th>User_email</th>
-        <th>Assignee_id</th>
+        <th>Assigned_to</th>
         <th>task_list_id</th>
       </tr>
     </thead>
@@ -21,7 +21,7 @@
           <td><%= link_to task.title, project_task_list_task_path(@project, @task_list, task) %></td>
           <td><%= link_to task.description, project_task_list_task_path(@project, @task_list, task) %></td>
           <td><%= link_to task.user.email, project_task_list_task_path(@project, @task_list, task) %></td>
-          <td><%= link_to task.assignee_id, project_task_list_task_path(@project, @task_list, task) %></td>
+          <td><%= link_to task.assignee.email, project_task_list_task_path(@project, @task_list, task) %></td>
           <td><%= link_to task.task_list_id, project_task_list_task_path(@project, @task_list, task) %></td>
           <td><%= link_to 'Edit', edit_project_task_list_task_path(@project, @task_list, task),
             class: 'btn btn-warning' %></td>
