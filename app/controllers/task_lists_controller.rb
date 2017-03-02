@@ -3,7 +3,7 @@ class TaskListsController < ApplicationController
 
   def index
     @project = Project.find params[:project_id]
-    @task_lists = @project.task_lists.all
+    @task_lists = @project.task_lists
   end
 
   def new
@@ -30,7 +30,7 @@ class TaskListsController < ApplicationController
 
   def update
     if @task_list.update_attributes(task_list_params)
-      redirect_to project_task_lists_path(@task_list.project.id)
+      redirect_to project_task_lists_path(@task_list.project)
     else
       flash[:errors] = @task_list.errors.messages
       render :edit
@@ -39,7 +39,7 @@ class TaskListsController < ApplicationController
 
   def destroy
     @task_list.destroy
-    redirect_to project_task_lists_path(@task_list.project.id)
+    redirect_to project_task_lists_path(@task_list.project)
   end
 
   private

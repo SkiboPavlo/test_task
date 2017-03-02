@@ -5,9 +5,6 @@
     <%= form_for @task, url: {action: "create"}, html: {class: "nifty_form"} do |f| %>
       <div class="form-group">
         <div class="col-xs-2">
-          <%= f.label :task_list_id %>
-          <%= f.select :title, TaskList.all.collect {|p| [ p.title, p.id ]} %>
-
           <%= f.label :title %>
           <%= f.text_field :title %>
 
@@ -19,6 +16,9 @@
 
           <%= f.label :assignee_id %>
           <%= f.select :assignee_id, User.all.collect {|p| [ p.email, p.id ] } %>
+
+          <%= f.label :task_list_id %>
+          <%= f.select :task_list_id, TaskList.all.collect {|p| [ p.title, p.id ]} %>
         </div>
       </div>
 

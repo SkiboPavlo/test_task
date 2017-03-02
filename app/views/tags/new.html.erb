@@ -2,29 +2,23 @@
   <div class="form-horizontal">
     <h1>New Tag</h1>
 
-      <div class="form-inline">
-        <p><%= "Project:" %></p>
-        <p><%= @task_list.project.title %></p>
-        <p><%= @task_list.project.id %></p>
-        <p><%= "Task_list:" %></p>
-        <p><%= @tag.task.title %></>
-        <p><%= @tag.task.id %></p>
-      </div>
     <%= form_for @tag, url: {action: "create"}, html: {class: "nifty_form"} do |f| %>
-
       <div class="form-group">
         <div class="col-xs-2">
           <%= f.label :title %>
           <%= f.text_field :title %>
 
           <%= f.label :description %>
-          <%= f.text_field :description %>
-        </div>
+          <%= f.select :description, [ 'Hight', 'Medium', 'Low' ], :prompt => 'Priority' %>
+
+          <%= f.label :project_id %>
+          <%= f.select :project_id, Project.all.collect {|p| [ p.title, p.id ]} %>
+          </div>
       </div>
 
       <%= f.submit "Create", class: 'btn btn-primary' %>
-      <%= link_to 'All Tags', project_task_list_task_tags_path, class: 'btn btn-warning' %>
-      <%= link_to 'Back', project_task_list_tasks_path, class: 'btn btn-default' %><br>
+      <%= link_to 'Back', project_tags_path, class: 'btn btn-default' %><br>
     <% end %>
   </div>
 </div>
+

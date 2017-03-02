@@ -13,8 +13,12 @@
     <tbody>
       <% @projects.each do |project| %>
         <tr>
-          <td><%= link_to project.title, project_task_lists_path(project) %></td>
+          <td><%= link_to project.title %></td>
           <td><%= project.user.email %></td>
+          <td><%= link_to 'All Tag', project_tags_path(project),
+            class: 'btn btn-primary' %></td>
+          <td><%= link_to 'All Task_list', project_task_lists_path(project),
+          class: 'btn btn-primary' %></td>
           <td><%= link_to 'Show', project_path(project), class: 'btn btn-primary' %></td>
           <td><%= link_to 'Edit', edit_project_path(project), class: 'btn btn-warning' %></td>
           <td><%= link_to 'Destroy', project, method: :delete,

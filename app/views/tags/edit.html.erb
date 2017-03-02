@@ -2,26 +2,23 @@
   <div class="form-horizontal">
     <h1>Editing Tag</h1>
 
-    <%= form_for @tag, url: {action: "update"}, html: {class: "nifty_form"} do |f| %>
+    <%= form_for(@tag) do |f| %>
       <div class="form-group">
         <div class="col-xs-2">
           <%= f.label :title %>
           <%= f.text_field :title %>
 
           <%= f.label :description %>
-          <%= f.text_field :description %>
+          <%=f.select :description, [ 'Hight', 'Medium', 'Low' ], :prompt => 'Priority' %>
 
           <%= f.label :project_id %>
-          <%= f.select :project_id, Project.all.collect {|p| [ p.title, p.id ] } %>
-
-          <%= f.label :task_id %>
-          <%= f.select :task_id, Task.all.collect {|t| [ t.title, t.id ] } %>
+          <%= f.select :project_id, Project.all.collect {|p| [ p.title, p.id ]} %>
         </div>
       </div>
 
       <%= f.submit 'Update', class: 'btn btn-primary' %>
-      <%= link_to 'Show', project_task_list_task_tag_path, class: 'btn btn-primary' %>
-      <%= link_to 'Back', project_task_list_task_tags_path, class: 'btn btn-default' %>
+      <%= link_to 'Show', tag_path, class: 'btn btn-primary' %>
+      <%= link_to 'Back', project_tags_path(@tag.project), class: 'btn btn-default' %>
     <% end %>
   </div>
 </div>

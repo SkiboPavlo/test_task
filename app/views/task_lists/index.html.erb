@@ -16,6 +16,7 @@
         <tr>
           <td><%= link_to task_list.title, task_list_tasks_path(task_list) %></td>
           <td><%= link_to task_list.project_id, project_task_lists_path(@project) %></td>
+          <td><%= link_to 'Show', task_list_path(task_list), class: 'btn btn-primary' %></td>
           <td><%= link_to 'Edit', edit_task_list_path(task_list),
           class: 'btn btn-warning' %></td>
           <td><%= link_to 'Destroy', task_list_path(task_list), method: :delete,

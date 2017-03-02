@@ -3,12 +3,12 @@ class TasksController < ApplicationController
 
   def index
     @task_list = TaskList.find params[:task_list_id]
-    @tasks = @task_list.tasks.all
+    @tasks = @task_list.tasks
   end
 
   def new
     task_list = TaskList.find params[:task_list_id]
-    @task = task_list.tasks.new{:task_list_id}
+    @task = task_list.tasks.build
   end
 
   def edit
@@ -30,7 +30,7 @@ class TasksController < ApplicationController
 
   def update
     if @task.update_attributes(task_params)
-      redirect_to task_list_tasks_path(@task.task_list.id)
+      redirect_to task_list_tasks_path(@task.task_list)
     else
       flash[:errors] = @task.errors.messages
       render :edit
@@ -39,7 +39,7 @@ class TasksController < ApplicationController
 
   def destroy
     @task.destroy
-    redirect_to task_list_tasks_path(@task.task_list.id)
+    redirect_to task_list_tasks_path(@task.task_list)
   end
 
   private

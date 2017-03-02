@@ -1,18 +1,14 @@
-  class TagsController < ApplicationController
+class TagsController < ApplicationController
   before_action :load_tag, only: [:edit, :update, :destroy, :show]
 
   def index
-    @project = Project.find params[:project_id]
-    @task_list = TaskList.find params[:task_list_id]
-    @task = Task.find params[:task_id]
-    @tags = @task.tags.all
+    @task = Project.find params[:project_id]
+    @tags = @task.tags
   end
 
   def new
-    task = Task.find params[:task_id]
-    @tag = task.tags.new{:task_id}
-    @project = Project.find params[:project_id]
-    @task_list = TaskList.find params[:task_list_id]
+    project = Project.find params[:project_id]
+    @tag = project.tags.build
   end
 
   def edit
@@ -22,12 +18,10 @@
   end
 
   def create
-    @project = Project.find params[:project_id]
-    @task_list = TaskList.find params[:task_list_id]
-    task = Task.find params[:task_id]
-    @tag = task.tags.new{:task_id}
+    project = Project.find(params[:project_id])
+    @tag = project.tags.build(tag_params)
     if @tag.save
-      redirect_to project_task_list_task_tags_path
+      redirect_to project_tags_path
     else
       flash[:errors] = @tag.errors.messages
       render :new
@@ -36,7 +30,7 @@
 
   def update
     if @tag.update_attributes(tag_params)
-      redirect_to project_task_list_task_tags_path
+      redirect_to project_tags_path(@tag.project)
     else
       flash[:errors] = @tag.errors.messages
       render :edit
@@ -45,20 +39,17 @@
 
   def destroy
     @tag.destroy
-    redirect_to project_task_list_task_tags_path
+    redirect_to project_tags_path(@tag.project)
   end
 
   private
 
   def load_tag
     @tag = Tag.find params[:id]
-    @project = Project.find params[:project_id]
-    @task_list = TaskList.find params[:task_list_id]
-    @task = Task.find params[:task_id]
-    render :file => "#{Rails.root}/public/404.html",  :status => 404 unless @tag
+    render :file => "#{Rails.root}/public/404.html", :status => 404 unless @tag
   end
 
   def tag_params
-    params.require(:tag).permit(:title, :description, :project_id, :task_id)
+    params.require(:tag).permit(:title, :description, :project_id)
   end
 end
