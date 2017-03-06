@@ -14,7 +14,9 @@
       </div>
 
       <%= f.submit "Update", class: 'btn btn-primary' %>
+      <%= link_to 'All Task_lists', project_task_lists_path(@task_list.project), class: 'btn btn-warning' %>
       <%= link_to 'Back', project_task_lists_path(@task_list.project), class: 'btn btn-default' %>
     <% end %>
   </div>
 </div>
+

@@ -2,18 +2,15 @@
   <div class="form-horizontal">
     <h1>New Tag</h1>
 
-    <%= form_for @tag, url: {action: "create"}, html: {class: "nifty_form"} do |f| %>
+    <%= form_for [@tag.project, @tag] do |f| %>
       <div class="form-group">
         <div class="col-xs-2">
           <%= f.label :title %>
           <%= f.text_field :title %>
 
-          <%= f.label :description %>
-          <%= f.select :description, [ 'Hight', 'Medium', 'Low' ], :prompt => 'Priority' %>
-
           <%= f.label :project_id %>
           <%= f.select :project_id, Project.all.collect {|p| [ p.title, p.id ]} %>
-          </div>
+        </div>
       </div>
 
       <%= f.submit "Create", class: 'btn btn-primary' %>
@@ -21,4 +18,6 @@
     <% end %>
   </div>
 </div>
+
+
 

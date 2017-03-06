@@ -1,0 +1,16 @@
+<div class="col-md-4">
+  <div class="form-horizontal">
+    <%= form_for(@project) do |f| %>
+      <div class="form-group">
+        <div class="col-xs-2">
+          <%= f.label :title %>
+          <%= f.text_field :title %>
+
+          <%= f.label :user_id %>
+          <%= f.select :user_id, User.all.collect {|p| [ p.email, p.id ] } %>
+          <%= f.submit %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

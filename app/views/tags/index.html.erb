@@ -16,7 +16,6 @@
       <% @tags.each do |tag| %>
         <tr>
           <td><%= link_to tag.title, project_tags_path %></td>
-          <td><%= link_to tag.description %></td>
           <td><%= link_to 'Show', tag_path(tag), class: 'btn btn-primary' %></td>
           <td><%= link_to 'Edit', edit_tag_path(tag), class: 'btn btn-warning' %></td>
           <td><%= link_to 'Destroy', tag_path(tag), method: :delete, data: { confirm: 'Are you sure?' },

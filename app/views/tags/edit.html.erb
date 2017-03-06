@@ -2,24 +2,23 @@
   <div class="form-horizontal">
     <h1>Editing Tag</h1>
 
-    <%= form_for(@tag) do |f| %>
+    <%= form_for @tag do |f| %>
       <div class="form-group">
         <div class="col-xs-2">
           <%= f.label :title %>
           <%= f.text_field :title %>
-
-          <%= f.label :description %>
-          <%=f.select :description, [ 'Hight', 'Medium', 'Low' ], :prompt => 'Priority' %>
 
           <%= f.label :project_id %>
           <%= f.select :project_id, Project.all.collect {|p| [ p.title, p.id ]} %>
         </div>
       </div>
 
-      <%= f.submit 'Update', class: 'btn btn-primary' %>
+      <%= f.submit "Update", class: 'btn btn-primary' %>
       <%= link_to 'Show', tag_path, class: 'btn btn-primary' %>
       <%= link_to 'Back', project_tags_path(@tag.project), class: 'btn btn-default' %>
     <% end %>
   </div>
 </div>
+
+
 

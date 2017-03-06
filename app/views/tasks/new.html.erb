@@ -2,7 +2,7 @@
   <div class="form-horizontal">
     <h1>New Task</h1>
 
-    <%= form_for @task, url: {action: "create"}, html: {class: "nifty_form"} do |f| %>
+    <%= form_for [@task.task_list, @task] do |f| %>
       <div class="form-group">
         <div class="col-xs-2">
           <%= f.label :title %>
@@ -23,7 +23,7 @@
           <%= f.label :attachment %>
           <%= f.file_field :attachment %>
 
-          <%= collection_check_boxes(:task, :tag_ids, @tag, :id, :description) %>
+          <%= collection_check_boxes(:task, :tag_ids, @tags, :id, :title) %>
         </div>
       </div>
 

@@ -9,11 +9,11 @@ class TasksController < ApplicationController
   def new
     task_list = TaskList.find params[:task_list_id]
     @task = task_list.tasks.build
-    @tag = Tag.all
+    @tags = Tag.all
   end
 
   def edit
-    @tag = Tag.all
+    @tags = Tag.all
   end
 
   def show
