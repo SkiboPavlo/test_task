@@ -9,9 +9,11 @@ class TasksController < ApplicationController
   def new
     task_list = TaskList.find params[:task_list_id]
     @task = task_list.tasks.build
+    @tag = Tag.all
   end
 
   def edit
+    @tag = Tag.all
   end
 
   def show
@@ -20,6 +22,7 @@ class TasksController < ApplicationController
   def create
     task_list = TaskList.find(params[:task_list_id])
     @task = task_list.tasks.build(task_params)
+
     if @task.save
       redirect_to task_list_tasks_path
     else
@@ -50,7 +53,8 @@ class TasksController < ApplicationController
   end
 
   def task_params
-    params.require(:task).permit(:title, :description, :user_id, :assignee_id, :task_list_id, :tag_id)
+    params.require(:task).permit(:title, :description, :user_id, :assignee_id,
+      :task_list_id, :attachment, tag_ids: [])
   end
 end
 

@@ -19,6 +19,11 @@
 
           <%= f.label :task_list_id %>
           <%= f.select :task_list_id, TaskList.all.collect {|p| [ p.title, p.id ]} %>
+
+          <%= f.label :attachment %>
+          <%= f.file_field :attachment %>
+
+          <%= collection_check_boxes(:task, :tag_ids, @tag, :id, :description) %>
         </div>
       </div>
 
@@ -27,4 +32,3 @@
     <% end %>
   </div>
 </div>
-

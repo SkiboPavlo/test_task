@@ -4,6 +4,7 @@ class TagsController < ApplicationController
   def index
     @task = Project.find params[:project_id]
     @tags = @task.tags
+    @tasks = Task.all
   end
 
   def new
@@ -12,6 +13,7 @@ class TagsController < ApplicationController
   end
 
   def edit
+    @tasks = Task.all
   end
 
   def show
@@ -50,6 +52,6 @@ class TagsController < ApplicationController
   end
 
   def tag_params
-    params.require(:tag).permit(:title, :description, :project_id)
+    params.require(:tag).permit(:title, :description, :project_id, task_id: [])
   end
 end
