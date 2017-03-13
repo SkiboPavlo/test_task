@@ -9,6 +9,8 @@ end
 gem 'rails', '~> 5.0.1'
 gem 'sqlite3'
 gem 'carrierwave' # for add files
+gem 'fog', '~> 1.38'
+gem 'mini_magick', '~> 4.6'
 gem 'puma', '~> 3.0'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
