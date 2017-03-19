@@ -33,4 +33,14 @@
       <% end %>
     </tbody>
   </table>
+
+<% @tasks.each do |f| %>
+<div id="page_wrapper">
+
+        <div id="profile_image">
+            <%= image_tag(f.attachment.url) %>
+        </div>
+<br>
+<% end %>
+
 </div>
