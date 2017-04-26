@@ -1,6 +1,6 @@
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def facebook
-    @user = User.from_omniauth(request.env["omniauth.auth"])
+    @user = UserProvider.find_for_facebook_oauth(request.env["omniauth.auth"])
 
     if @user.persisted?
       sign_in_and_redirect @user, :event => :authentication
@@ -12,25 +12,34 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   end
 
   def google_oauth2
-      @user = User.from_omniauth(request.env["omniauth.auth"])
+    @user = UserProvider.find_for_google_oauth(request.env["omniauth.auth"])
 
-      if @user.persisted?
-        flash[:notice] = I18n.t "devise.omniauth_callbacks.success", :kind => "Google"
-        sign_in_and_redirect @user, :event => :authentication
-      else
-        session["devise.google_data"] = request.env["omniauth.auth"]
-        redirect_to new_user_registration_url
-      end
+    # if @user.persisted?
+    #   flash[:notice] = I18n.t "devise.omniauth_callbacks.success", :kind => "Google"
+    #   sign_in_and_redirect @user, :event => :authentication
+    # else
+    #   session["devise.google_data"] = request.env["omniauth.auth"]
+    #   redirect_to new_user_registration_url
+    # end
+    if @user.persisted?
+      sign_in_and_redirect @user, :event => :authentication
+      set_flash_message(:notice, :success, :kind => "Google") if is_navigational_format?
+    else
+      session["devise.user_attributes"] = user.attributes
+      redirect_to new_user_registration_url
+    end
   end
 
   def twitter
-    @user = User.from_omniauth(request.env["omniauth.auth"])
+    auth = env["omniauth.auth"]
+    @user = UserProvider.find_for_twitter_oauth(request.env["omniauth.auth"])
 
     if @user.persisted?
       sign_in_and_redirect @user, :event => :authentication
       set_flash_message(:notice, :success, :kind => "twitter") if is_navigational_format?
     else
-      session["devise.twitter_data"] = request.env["omniauth.auth"].except("extra")
+      # session["devise.twitter_data"] = request.env["omniauth.auth"].except("extra")
+      session["devise.twitter_uid"] = request.env["omniauth.auth"]
       redirect_to new_user_registration_url
     end
   end

@@ -12,6 +12,8 @@ Devise.setup do |config|
   config.reset_password_within = 6.hours
   config.sign_out_via = :delete
   config.omniauth :facebook, "352786181790258", "1c972ce8de267609c527bd2e7aa96a97", callback_url: "http://localhost:3000/users/auth/facebook/callback"
-  config.omniauth :google_oauth2, "60044602994-dupqv354eicjccnh1l7fumorp9darncc.apps.googleusercontent.com", "3HD4PuzFeBn2B_AW59WfgCaH"
   config.omniauth :twitter, "L4A5Mxo5CrzomMzZ7RDSbIjnz", "sdOsANSlDMHedIlIIy5xGgSd1UbHyFQ47OSExJk0n91pPI45aT"
+  # config.omniauth :facebook, '352786181790258', '1c972ce8de267609c527bd2e7aa96a97' ,
+                  # {:scope => 'publish_stream,email,offline_access,manage_pages'}
+  config.omniauth :google_oauth2, "60044602994-dupqv354eicjccnh1l7fumorp9darncc.apps.googleusercontent.com", "3HD4PuzFeBn2B_AW59WfgCaH"
 end
